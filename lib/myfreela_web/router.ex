@@ -7,6 +7,7 @@ defmodule MyfreelaWeb.Router do
 
   scope "/api", MyfreelaWeb do
     pipe_through :api
+    resources "/users", UsersController, only: [:create, :show, :delete, :update]
   end
 
   # Enables LiveDashboard only for development
