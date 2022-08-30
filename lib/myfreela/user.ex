@@ -2,11 +2,16 @@ defmodule Myfreela.User do
   use Ecto.Schema
   import Ecto.Changeset
 
+  alias Myfreela.Profile
+  alias Ecto.Changeset
+
   schema "users" do
     field :name, :string
     field :email, :string
     field :password_hash, :string
     field :password, :string, virtual: true
+    has_one :profile, Profile
+
     timestamps()
   end
 
@@ -28,7 +33,7 @@ defmodule Myfreela.User do
     |> put_password_hash()
   end
 
-  defp put_password_hash(%Ecto.Changeset{valid?: true, changes: %{password: password}} = changeset) do
+  defp put_password_hash(%Changeset{valid?: true, changes: %{password: password}} = changeset) do
     change(changeset, Argon2.add_hash(password))
   end
 
