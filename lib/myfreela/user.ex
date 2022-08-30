@@ -25,12 +25,12 @@ defmodule Myfreela.User do
     |> validate_length(:password, min: 6)
     |> validate_format(:email, ~r/@/)
     |> unsafe_validate_unique([:email], Myfreela.Repo, message: "email is already in use")
-    |> put_pass_hash()
+    |> put_password_hash()
   end
 
-  defp put_pass_hash(%Ecto.Changeset{valid?: true, changes: %{password: password}} = changeset) do
+  defp put_password_hash(%Ecto.Changeset{valid?: true, changes: %{password: password}} = changeset) do
     change(changeset, Argon2.add_hash(password))
   end
 
-  defp put_pass_hash(changeset), do: changeset
+  defp put_password_hash(changeset), do: changeset
 end

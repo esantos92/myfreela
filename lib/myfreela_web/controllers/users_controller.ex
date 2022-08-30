@@ -9,6 +9,12 @@ defmodule MyfreelaWeb.UsersController do
     |> handle_response(conn)
   end
 
+  def delete(conn, %{"id" => id}) do
+    id
+    |> Myfreela.delete_user()
+    |> handle_delete(conn)
+  end
+
   defp handle_response({:ok, user}, conn) do
     conn
     |> put_status(:created)
@@ -16,4 +22,13 @@ defmodule MyfreelaWeb.UsersController do
   end
 
   defp handle_response({:error, _changeset} = error, _conn), do: error
+
+  defp handle_delete({:ok, _user}, conn) do
+    conn
+    |> put_status(:no_content)
+    |> text("")
+  end
+
+  defp handle_delete({:error, _reason} = error, _conn), do: error
+
 end
