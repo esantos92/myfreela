@@ -25,8 +25,8 @@ defmodule Myfreela.User.Create do
       github_username: "Insira seu github",
       monthly_budget: "0.00",
       value_hour: "0.00",
-      days_per_week: 7,
-      hours_per_day: 27,
+      days_per_week: 5,
+      hours_per_day: 8,
       vacation_per_year: 30,
       user_id: user_id
     }

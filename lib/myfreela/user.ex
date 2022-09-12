@@ -10,9 +10,9 @@ defmodule Myfreela.User do
     field :email, :string
     field :password_hash, :string
     field :password, :string, virtual: true
-    has_one :profile, Profile
-
     timestamps()
+
+    has_one :profile, Profile
   end
 
   @required_params [:name, :email, :password]

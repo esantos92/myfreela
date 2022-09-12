@@ -1,7 +1,9 @@
 defmodule MyfreelaWeb.ErrorView do
   use MyfreelaWeb, :view
 
+  alias Ecto.Changeset
   import Ecto.Changeset, only: [traverse_errors: 2]
+
 
   # If you want to customize a particular status code
   # for a certain format, you may uncomment below.
@@ -16,9 +18,17 @@ defmodule MyfreelaWeb.ErrorView do
     %{errors: %{detail: Phoenix.Controller.status_message_from_template(template)}}
   end
 
-  def render("400.json", %{result: result}) do
-    %{message: translate_errors(result)}
+  def render("400.json", %{result: %Changeset{} = changeset}) do
+    %{message: translate_errors(changeset)}
   end
+
+  def render("400.json", %{result: error_message}) do
+    %{message: error_message}
+  end
+
+  # def render("400.json", %{result: result}) do
+  #   %{message: translate_errors(result)}
+  # end
 
   defp translate_errors(changeset) do
     traverse_errors(changeset, fn {msg, opts} ->

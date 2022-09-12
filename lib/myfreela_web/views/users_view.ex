@@ -14,4 +14,13 @@ defmodule MyfreelaWeb.UsersView do
       }
     }
   end
+
+  def render("show.json", %{user: %User{id: id, name: name, email: email, inserted_at: inserted_at}}) do
+    %{
+      id: id,
+      name: name,
+      email: email,
+      inserted_at: inserted_at
+    }
+  end
 end

@@ -1,24 +1,24 @@
-defmodule MyfreelaWeb.UsersController do
+defmodule MyfreelaWeb.ProfilesController do
   use MyfreelaWeb, :controller
 
   action_fallback MyfreelaWeb.FallbackController
 
-  def create(conn, params) do
-    params
-    |> Myfreela.create_user()
-    |> handle_response(conn, "create.json", :created)
-  end
-
   def show(conn, %{"id" => id}) do
     id
-    |> Myfreela.fetch_user()
+    |> Myfreela.fetch_profile()
     |> handle_response(conn, "show.json", :ok)
   end
 
-  defp handle_response({:ok, user}, conn, view, status) do
+  def update(conn, params) do
+    params
+    |> Myfreela.update_profile()
+    |> handle_response(conn, "update.json", :ok)
+  end
+
+  defp handle_response({:ok, profile}, conn, view, status) do
     conn
     |> put_status(status)
-    |> render(view, user: user)
+    |> render(view, profile: profile)
   end
 
   defp handle_response({:error, _changeset} = error, _conn, _view, _status), do: error
