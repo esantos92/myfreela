@@ -9,3 +9,7 @@
 #
 # We recommend using the bang functions (`insert!`, `update!`
 # and so on) as they will fail if something goes wrong.
+
+user_params= %{name: "Erisvaldo Mascarenhas Tortorelo", email: "valdo_masca123@email.com", password: "abc1234def"}
+
+Myfreela.create_user(user_params)
