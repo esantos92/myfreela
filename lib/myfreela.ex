@@ -14,5 +14,6 @@ defmodule Myfreela do
   defdelegate delete_job(params), to: Job.Delete, as: :call
   defdelegate fetch_job(params), to: Job.Get, as: :call
   defdelegate update_job(params), to: Job.Update, as: :call
+  defdelegate index_jobs(params), to: Job.Index, as: :call
 
 end

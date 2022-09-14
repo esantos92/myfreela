@@ -29,6 +29,6 @@ defmodule Myfreela.Job do
     |> cast(params, @required_params)
     |> validate_required(@required_params)
     |> validate_inclusion(:daily_hours, 1..12)
-    |> foreign_key_constraint(:user, name: :jobs_user_id_fkey)
+    |> foreign_key_constraint(:profile, name: :jobs_profile_id_fkey)
   end
 end

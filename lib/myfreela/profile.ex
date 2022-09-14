@@ -29,5 +29,6 @@ defmodule Myfreela.Profile do
     |> validate_inclusion(:days_per_week, 1..7)
     |> validate_inclusion(:hours_per_day, 1..12)
     |> validate_inclusion(:vacation_per_year, 1..30)
+    |> foreign_key_constraint(:user, name: :profile_user_id_fkey)
   end
 end

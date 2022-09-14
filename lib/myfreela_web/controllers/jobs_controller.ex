@@ -38,7 +38,7 @@ defmodule MyfreelaWeb.JobsController do
   defp handle_delete({:ok, _job}, conn) do
     conn
     |> put_status(:ok)
-    |> text("")
+    |> text("Job deleted")
   end
 
   defp handle_delete({:error, _reason} = error, _conn), do: error
