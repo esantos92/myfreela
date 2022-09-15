@@ -10,6 +10,7 @@ defmodule MyfreelaWeb.Router do
     resources "/user", UsersController, only: [:create, :show]
     resources "/profile", ProfilesController, only: [:show, :update]
     resources "/jobs", JobsController, only: [:create, :show, :update, :delete]
+
     # resources "/profile/jobs", JobsController, only: [:index]
     scope "/jobs" do
       get("/index_jobs/:id", JobsController, :index)
