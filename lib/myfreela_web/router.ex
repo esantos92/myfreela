@@ -7,11 +7,16 @@ defmodule MyfreelaWeb.Router do
 
   scope "/api", MyfreelaWeb do
     pipe_through :api
-    resources "/user", UsersController, only: [:create, :show]
-    resources "/profile", ProfilesController, only: [:show, :update]
-    # resources "/jobs", JobsController, only: [, , ]
+    scope "/user" do
+      post("/", UsersController, :create)
+      get("/:id", UsersController, :show)
+    end
 
-    # resources "/profile/jobs", JobsController, only: [:index]
+    scope "/profile" do
+      get("/:id", ProfilesController, :show)
+      put("/:id", ProfilesController, :update)
+    end
+
     scope "/jobs" do
       post("/", JobsController, :create)
       get("/index_jobs/:profile_id", JobsController, :index)
