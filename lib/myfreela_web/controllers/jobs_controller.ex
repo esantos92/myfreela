@@ -27,8 +27,8 @@ defmodule MyfreelaWeb.JobsController do
     |> handle_response(conn, "update.json", :ok)
   end
 
-  def index(conn, %{"id" => id}) do
-    with {:ok, jobs} <- Myfreela.index_jobs(id) do
+  def index(conn, %{"profile_id" => profile_id}) do
+    with {:ok, jobs} <- Myfreela.index_jobs(profile_id) do
       conn
       |> put_status(:ok)
       |> render("index.json", jobs: jobs)
