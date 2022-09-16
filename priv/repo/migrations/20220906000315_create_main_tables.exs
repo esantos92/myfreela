@@ -27,6 +27,7 @@ defmodule Myfreela.Repo.Migrations.CreateMainTables do
       add :title, :string
       add :daily_hours, :integer
       add :total_hours, :integer
+      add :status, :string
 
       timestamps()
     end
