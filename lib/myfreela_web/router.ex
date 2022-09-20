@@ -5,25 +5,40 @@ defmodule MyfreelaWeb.Router do
     plug :accepts, ["json"]
   end
 
+  pipeline :auth do
+    plug MyfreelaWeb.Auth.Pipeline
+  end
+
   scope "/api", MyfreelaWeb do
     pipe_through :api
-    resources "/user", UsersController, only: [:create, :show]
-    resources "/profile", ProfilesController, only: [:show, :update]
-    resources "/jobs", JobsController, only: [:create, :show, :update, :delete]
-
-    # resources "/profile/jobs", JobsController, only: [:index]
-    scope "/jobs" do
-      get("/index_jobs/:id", JobsController, :index)
+    scope "/user" do
+      post("/signup", UsersController, :create)
+      post("/signin", UsersController, :sign_in)
     end
   end
 
-  # Enables LiveDashboard only for development
-  #
-  # If you want to use the LiveDashboard in production, you should put
-  # it behind authentication and allow only admins to access it.
-  # If your application does not have an admins-only section yet,
-  # you can use Plug.BasicAuth to set up some basic authentication
-  # as long as you are also using SSL (which you should anyway).
+  scope "/api", MyfreelaWeb do
+    pipe_through :api
+    pipe_through :auth
+
+    scope "/user" do
+      get("/:id", UsersController, :show)
+    end
+
+    scope "/profile" do
+      get("/:id", ProfilesController, :show)
+      put("/:id", ProfilesController, :update)
+    end
+
+    scope "/jobs" do
+      post("/", JobsController, :create)
+      get("/index_jobs/:profile_id", JobsController, :index)
+      get("/:id", JobsController, :show)
+      put("/:id", JobsController, :update)
+      delete("/:id", JobsController, :delete)
+    end
+  end
+
   if Mix.env() in [:dev, :test] do
     import Phoenix.LiveDashboard.Router
 

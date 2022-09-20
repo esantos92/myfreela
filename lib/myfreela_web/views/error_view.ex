@@ -26,9 +26,9 @@ defmodule MyfreelaWeb.ErrorView do
     %{message: error_message}
   end
 
-  # def render("400.json", %{result: result}) do
-  #   %{message: translate_errors(result)}
-  # end
+  def render("401.json", %{message: message}) do
+    %{message: message}
+  end
 
   defp translate_errors(changeset) do
     traverse_errors(changeset, fn {msg, opts} ->
