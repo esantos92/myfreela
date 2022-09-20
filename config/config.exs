@@ -29,3 +29,11 @@ config :phoenix, :json_library, Jason
 # Import environment specific config. This must remain at the bottom
 # of this file so it overrides the configuration defined above.
 import_config "#{Mix.env()}.exs"
+
+config :myfreela, MyfreelaWeb.Auth.Guardian,
+       issuer: "myfreela",
+       secret_key: "iWC/trQc6C22VAMMPQP38vQBciNg3l/lOAtO08+HIlEQ33nOOGX4wO6pELQ5xWS7"
+
+config :myfreela, MyfreelaWeb.Auth.Pipeline,
+  module: MyfreelaWeb.Auth.Guardian,
+  error_handler: MyfreelaWeb.Auth.ErrorHandler

@@ -3,7 +3,7 @@ defmodule MyfreelaWeb.UsersView do
 
   alias Myfreela.User
 
-  def render("create.json", %{user: %User{id: id, name: name, email: email, inserted_at: inserted_at}}) do
+  def render("create.json", %{user: %User{id: id, name: name, email: email, inserted_at: inserted_at}, token: token}) do
     %{
       message: "User Created",
       user: %{
@@ -11,7 +11,8 @@ defmodule MyfreelaWeb.UsersView do
         name: name,
         email: email,
         inserted_at: inserted_at
-      }
+      },
+      token: token
     }
   end
 
@@ -21,6 +22,13 @@ defmodule MyfreelaWeb.UsersView do
       name: name,
       email: email,
       inserted_at: inserted_at
+    }
+  end
+
+  def render("sign_in.json", %{token: token, user: %User{id: id}}) do
+    %{
+      token: token,
+      user_id: id
     }
   end
 end
