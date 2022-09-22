@@ -17,3 +17,21 @@ Ready to run in production? Please [check our deployment guides](https://hexdocs
   * Docs: https://hexdocs.pm/phoenix
   * Forum: https://elixirforum.com/c/phoenix-forum
   * Source: https://github.com/phoenixframework/phoenix
+
+## executando container
+
+após clonar projeto seguir sequência de comandos:
+
+docker-compose run phoenix bash
+
+  mix deps.clean --all
+
+  mix deps.get
+
+  mix ecto.setup
+
+fora do container
+
+docker-compose up --build
+
+após para subir o container não necessita da flag --build
